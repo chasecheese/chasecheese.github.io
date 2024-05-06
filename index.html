@@ -1,0 +1,589 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="This site is built by bootstrap v5.3.2">
+  <meta name="author" content="Mingxin Li">
+
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+
+  <link href="./bootstrap-5.3.2-dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <!-- <link href='https://fonts.googleapis.com/css?family=fira-sans' rel='stylesheet'> -->
+  <!-- <link href="./normalize.css" rel="stylesheet" type="text/css"> -->
+  <!-- <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>&#129418;</text></svg>"> -->
+
+  <title>Mingxin Li</title>
+
+  <style type="text/css">
+    @font-face {
+      font-family: "fira-sans";
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url("fonts/FiraSans-Regular.woff2") format("woff2")
+    }
+
+    @font-face {
+      font-family: "fira-sans-light";
+      font-style: normal;
+      font-weight: 300;
+      font-display: swap;
+      src: url("fonts/FiraSans-Light.woff2") format("woff2")
+    }
+
+    @font-face {
+      font-family: "fira-sans-bold";
+      font-style: normal;
+      font-weight: 600;
+      font-display: swap;
+      src: url("fonts/FiraSans-Bold.woff2") format("woff2")
+    }
+
+    @font-face {
+      font-family: "fira-sans-italic";
+      font-style: italic;
+      font-weight: 400;
+      font-display: swap;
+      src: url("fonts/FiraSans-Italic.woff2") format("woff2")
+    }
+
+    @font-face {
+      font-family: "fira-sans-thin";
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url("fonts/FiraSans-Thin.woff2") format("woff2")
+    }
+
+    @font-face {
+      font-family: "fira-sans-ultra-light";
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url("fonts/FiraSans-UltraLight.woff2") format("woff2")
+    }
+    @font-face {
+      font-family: "fira-sans-medium";
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url("fonts/FiraSans-Medium.woff2") format("woff2")
+    }
+
+
+
+    html {
+      position: relative;
+      min-height: 100%;
+    }
+
+    h1 {
+      font-size: 24px;
+      font-family: "fira-sans", sans-serif;
+    }
+
+    h2 {
+      font-size: 24px;
+      font-family: "fira-sans-medium", sans-serif;
+      text-align: left;
+    }
+
+    span.date {
+      float: right;
+      font-size: 16px;
+      font-family: "fira-sans-light", sans-serif;
+    }
+
+    span.ta {
+      font-size: 16px;
+      font-family: "fira-sans-light", sans-serif;
+    }
+
+    span.reins {
+      font-size: 16px;
+      font-family: "fira-sans-light", sans-serif;
+    }
+
+    span.aws {
+      font-size: 16px;
+      font-family: "fira-sans-light", sans-serif;
+    }
+
+    span.eduu {
+      font-size: 16px;
+    }
+
+    span.foot {
+      font-size: 14px;
+      font-family: "fira-sans-ultra-light", sans-serif;
+    }
+
+    span.edum {
+      font-size: 16px;
+      font-family: "fira-sans-light", sans-serif;
+    }
+
+    span.edue {
+      font-size: 16px;
+      font-family: "fira-sans-light", sans-serif;
+    }
+
+    span.intro {
+      font-size: 16px;
+      font-family: "fira-sans-light", sans-serif;
+    }
+
+    span.link {
+      float: right;
+      color: #023c9f;
+      font-family: "fira-sans-light", sans-serif;
+    }
+
+    span.expe {
+      font-size: 16px;
+      font-family: "fira-sans-light", sans-serif;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    a.link {
+      color: #023c9f;
+      font-family: "fira-sans-light", sans-serif;
+    }
+
+    span.nav {
+      margin-left: 10px;
+      float: right;
+      color: #023c9f;
+      font-family: "fira-sans-light", sans-serif;
+    }
+
+    span.email {
+      font-family: "fira-sans-light", sans-serif;
+      font-size: 16px;
+    }
+
+    span.names {
+      font-size: 16px;
+      font-family: "fira-sans-ultra-light", sans-serif;
+    }
+
+    span.myname {
+      font-size: 16px;
+      font-family: "fira-sans", sans-serif;
+    }
+
+    span.source {
+      font-size: 16px;
+      font-family: "fira-sans-light", sans-serif;
+    }
+
+    span.short {
+      font-size: 16px;
+      font-family: "fira-sans-light", sans-serif;
+    }
+
+    body {
+      font-family: "fira-sans", sans-serif;
+      margin-bottom: 60px;
+      margin-top: 60px;
+    }
+  </style>
+
+</head>
+
+<body>
+  <!-- Bio -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2">
+      </div>
+      <div class="col-md-8">
+        <div class="media">
+
+          <a class="media-left" href="#">
+            <img src="./files/avator.jpeg" class="img-thumbnail rounded-circle" style="width: 180px; float: left;"
+              alt="">
+          </a>
+
+          <div class="media-body">
+            <div class="intro" style="text-align: right;">
+              <h1>Mingxin Li</h1>
+              <span class="intro">Ph.D. Student<br /></span>
+              <span class="intro">Department of Computer Science and Technology<br /></span>
+              <span class="intro">Nanjing University<br /></span>
+              <span class="email">mingxinli@smail.nju.edu.cn<br /></span>
+              <br>
+              <span>
+                <span class="nav"><a class="link" href="./files/resume_eng.pdf"
+                    target="_blank">CV</a></span>
+                <span class="nav"><a class="link" href="https://github.com/chasecheese"
+                    target="_blank">GitHub</a></span>
+                <!-- <span class="nav"> <a class="link" href="./index.html">Home</a></span> -->
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-2">
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <p></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <hr />
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+  </div>
+
+  <!-- space 1 line -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <p></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <p></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Research Interests -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <h2>Research Interests<h2>
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-12">
+            <span class="reins">
+              Systems and Networking, <a target="_blank" href="https://ebpf.io/" style="color:#023c9f;">extended
+                Berkeley
+                Packet Filter (eBPF)</a>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+  </div>
+
+
+  <!-- space 1 line -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <p></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <p></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Education -->
+  <div class="container">
+
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <h2>Education</h2>
+
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-2"></div>
+
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-12">
+            <span class="eduu">Nanjing University</span> <span class="date">2022 - Present</span>
+            <br />
+            <span class="edum">Ph.D. Student in Computer Science and Technology</span>
+            <br />
+            <span class="edue">Adviser: Prof. Guihai Chen</span>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <p></p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <span class="eduu">Harbin Institute of Technology</span> <span class="date">2018 - 2022</span>
+            <br />
+            <span class="edum">B.E. in Software Engineering</span>
+            <br />
+            <span class="edue">GPA: 3.81/4.00</span>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+  </div>
+  </div>
+
+  <!-- space 1 line -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <p></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <p></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Publications -->
+
+  <div class="container">
+
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <h2>Publications</h2>
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-2"></div>
+
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-12">
+            <b>A Survey of Multi-Dimensional Indexes: Past and Future Trends</b> <span class="link"><a class="link"
+                target="_blank" href="https://doi.org/10.1109/TKDE.2024.3364183">[Link]</a></span>
+            <br />
+            <span class="myname"><em>Mingxin Li</em></span><span class="names">, Hancheng Wang, Haipeng Dai, Meng Li,
+              Chengliang
+              Chai, Rong Gu, Feng
+              Chen, Zhiyuan Chen,
+              Shuaituan Li, Qizhi Liu, Guihai Chen</span>
+            <br />
+            <span class="source">IEEE Transactions on Knowledge and Data Engineering</span> <span
+              class="short">(TKDE'24)</span>
+          </div>
+        </div>
+
+        <!-- <div class="row">
+          <div class="col-md-12">
+            <p></p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <b>A Survey of Multi-Dimensional Indexes: Past and Future Trends</b> <span class="link"><a class="link"
+                target="_blank" href="https://doi.org/10.1109/TKDE.2024.3364183">[Link]</a></span>
+            <br />
+            <span class="myname"><em>Mingxin Li</em></span><span class="names">, Hancheng Wang, Haipeng Dai, Meng Li,
+              Chengliang
+              Chai, Rong Gu, Feng
+              Chen, Zhiyuan Chen,
+              Shuaituan Li, Qizhi Liu, Guihai Chen</span>
+            <br />
+            <span class="source">IEEE Transactions on Knowledge and Data Engineering</span> <span
+              class="short">(TKDE'24)</span>
+          </div>
+        </div>
+         -->
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+  </div>
+
+  <!-- space 1 line -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <p></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <p></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Experience -->
+  <div class="container">
+
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <h2>Experience</h2>
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-2"></div>
+
+      <div class="col-md-8">
+
+        <div class="row">
+          <div class="col-md-12">
+            Harbin Institute of Technology <span class="date">2020 - 2022</span>
+            <br />
+            <span class="expe">Research Assitant</span>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+  </div>
+
+
+  <!-- space 1 line -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <p></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <p></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Teaching Assistant -->
+  <div class="container">
+
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <h2>Teaching Assistant<h2>
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-2"></div>
+
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-12">
+            <li><span class="ta"><a class="link" target="_blank" href=https://cs.nju.edu.cn/gchen/DN/DN.htm>Distributed Networks</a></span><span class="date">2023</span></li>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-2"></div>
+    </div>
+  </div>
+
+
+  <!-- space 1 line -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <p></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <p></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Awards -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <h2>Awards</h2>
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-12">
+            <li><span class="aws">Presidential Special Scholarship</span> <span class="date">2022</span></li>
+            <li><span class="aws">Excellent Student Scholarship</span> <span class="date">2021, 2020, 2019</span></li>
+            <li><span class="aws">National Scholarship (Top 1.5%)</span> <span class="date">2019</span></li>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+  </div>
+
+  <!-- space 3 line -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <p></p>
+      </div>
+      <div class="col-md-12">
+        <p></p>
+      </div>
+      <div class="col-md-12">
+        <p></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Time Tag -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2"></div>
+      <footer class="text-center">
+        <div>
+          <span class="foot">&#127752; Last modified date: Mar. 2024</span>
+        </div>
+      </footer>
+      <div class="col-md-2"></div>
+    </div>
+  </div>
+
+</body>
+
+</html>
