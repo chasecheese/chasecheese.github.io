@@ -1,0 +1,174 @@
+@font-face {
+  font-family: "fira-sans";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/FiraSans-Regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "fira-sans-light";
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("../fonts/FiraSans-Light.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "fira-sans-bold";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../fonts/FiraSans-Bold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "fira-sans-italic";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/FiraSans-Italic.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "fira-sans-thin";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/FiraSans-Thin.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "fira-sans-ultra-light";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/FiraSans-UltraLight.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "fira-sans-medium";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../fonts/FiraSans-Medium.woff2") format("woff2");
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+h1 {
+  font-size: 24px;
+  font-family: "fira-sans", sans-serif;
+}
+
+h2 {
+  font-size: 24px;
+  font-family: "fira-sans-medium", sans-serif;
+  text-align: left;
+}
+
+span.date-meta {
+  float: right;
+  font-size: 16px;
+  font-family: "fira-sans-light", sans-serif;
+}
+
+span.ta-course {
+  font-size: 16px;
+  font-family: "fira-sans-light", sans-serif;
+}
+
+span.research-interest {
+  font-size: 16px;
+  font-family: "fira-sans-light", sans-serif;
+}
+
+span.award {
+  font-size: 16px;
+  font-family: "fira-sans-light", sans-serif;
+}
+
+span.education-institution {
+  font-size: 16px;
+}
+
+span.footer-note {
+  font-size: 14px;
+  font-family: "fira-sans-ultra-light", sans-serif;
+}
+
+span.education-degree {
+  font-size: 16px;
+  font-family: "fira-sans-light", sans-serif;
+}
+
+span.education-advisor {
+  font-size: 16px;
+  font-family: "fira-sans-light", sans-serif;
+}
+
+span.intro-text {
+  font-size: 16px;
+  font-family: "fira-sans-light", sans-serif;
+}
+
+span.app-link {
+  float: right;
+  color: #023c9f;
+  font-family: "fira-sans-light", sans-serif;
+}
+
+span.experience-position {
+  font-size: 16px;
+  font-family: "fira-sans-light", sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+a.app-link {
+  color: #023c9f;
+  font-family: "fira-sans-light", sans-serif;
+}
+
+span.nav-item {
+  margin-left: 10px;
+  float: right;
+  color: #023c9f;
+  font-family: "fira-sans-light", sans-serif;
+}
+
+span.email-text {
+  font-family: "fira-sans-light", sans-serif;
+  font-size: 16px;
+}
+
+span.author-list {
+  font-size: 16px;
+  font-family: "fira-sans-ultra-light", sans-serif;
+}
+
+span.author-self {
+  font-size: 16px;
+  font-family: "fira-sans", sans-serif;
+}
+
+span.publication-venue {
+  font-size: 16px;
+  font-family: "fira-sans-light", sans-serif;
+}
+
+span.publication-abbrev {
+  font-size: 16px;
+  font-family: "fira-sans-light", sans-serif;
+}
+
+body {
+  font-family: "fira-sans", sans-serif;
+  margin-bottom: 60px;
+  margin-top: 60px;
+}
