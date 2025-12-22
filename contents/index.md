@@ -1,9 +1,9 @@
 ---json
 {
   "layout": {
-     "left": 2,
-     "main": 8,
-     "right": 2
+     "left": 1,
+     "main": 9,
+     "right": 1
   },
   "icon_emoji": "🌈",
   "profile": {
