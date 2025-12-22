@@ -2,7 +2,7 @@
 {
   "layout": {
      "left": 1,
-     "main": 9,
+     "main": 10,
      "right": 1
   },
   "icon_emoji": "🌈",
