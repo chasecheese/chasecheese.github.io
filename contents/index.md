@@ -39,7 +39,7 @@
       "org": "Alibaba Cloud",
       "logo": "./files/alibabacloud.png",
       "date": "2025.07 - Present",
-      "roles": ["Intern@Research Team, LuoShen Cloud Network Department"]
+      "roles": ["Intern@Research Team, Department of LuoShen Cloud Network"]
     },
     {
       "org": "Harbin Institute of Technology",
