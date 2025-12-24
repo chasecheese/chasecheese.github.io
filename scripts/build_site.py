@@ -60,12 +60,6 @@ def col_classes(layout: Dict[str, Any]) -> Tuple[str, str, str]:
 
 def render_profile(data: Dict[str, Any], cols: Tuple[str, str, str]) -> str:
   left_col, main_col, right_col = cols
-  links_html = "".join(
-      f'<a class="link-accent profile__link" href="{esc(link.get("url"))}" target="_blank" '
-      f'rel="noopener noreferrer" aria-label="{esc(link.get("label"))}">{esc(link.get("label"))}</a>'
-      for link in data.get("links", [])
-      if link.get("url")
-  )
   return f"""
   <div class="container">
     <div class="row">
@@ -81,11 +75,33 @@ def render_profile(data: Dict[str, Any], cols: Tuple[str, str, str]) -> str:
               <h1>{esc(data.get("name"))}</h1>
               {''.join(f'<span class="profile__meta">{esc(line)}<br /></span>' for line in data.get("titles", []))}
               {''.join(f'<span class="profile__contact">{esc(email)}<br /></span>' for email in data.get("emails", []))}
-              <div class="profile__links">
-                {links_html}
-              </div>
             </div>
           </div>
+        </div>
+      </div>
+      <div class="{right_col}"></div>
+    </div>
+  </div>
+  """
+
+
+def render_profile_links(links: List[Dict[str, Any]], cols: Tuple[str, str, str]) -> str:
+  left_col, main_col, right_col = cols
+  link_items = [
+      f'<a class="link-accent profile__link" href="{esc(link.get("url"))}" target="_blank" '
+      f'rel="noopener noreferrer" aria-label="{esc(link.get("label"))}">{esc(link.get("label"))}</a>'
+      for link in links
+      if link.get("url")
+  ]
+  if not link_items:
+    return ""
+  return f"""
+  <div class="container">
+    <div class="row">
+      <div class="{left_col}"></div>
+      <div class="{main_col}">
+        <div class="profile__links">
+          {''.join(link_items)}
         </div>
       </div>
       <div class="{right_col}"></div>
@@ -268,14 +284,33 @@ def render_footer(note: str, cols: Tuple[str, str, str]) -> str:
   """
 
 
-def build_page(data: Dict[str, Any], layout_override: Dict[str, Any] | None = None) -> str:
+def build_page(data: Dict[str, Any], layout_override: Dict[str, Any] | None = None, include_analytics: bool = True) -> str:
   spacer = '<div class="row"><p></p></div>'
   double_spacer = spacer + "\n" + spacer
   cols = col_classes(layout_override or data.get("layout", {}))
   icon_href = favicon_data_url(data.get("icon_emoji") or data.get("favicon_emoji") or "🌐")
+  ga_script = ""
+  if include_analytics:
+    analytics_html = data.get("analytics_html")
+    if analytics_html:
+      ga_script = str(analytics_html)
+    else:
+      ga_id = data.get("analytics", {}).get("ga4_id", "G-E5MXQCZSSN")
+      if ga_id:
+        ga_script = f"""
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id={esc(ga_id)}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){{dataLayer.push(arguments);}}
+    gtag('js', new Date());
+    gtag('config', '{esc(ga_id)}');
+  </script>
+  """
   return f"""<!doctype html>
 <html lang="en">
 <head>
+{ga_script}
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="This site is built by bootstrap v5.3.2">
@@ -288,7 +323,7 @@ def build_page(data: Dict[str, Any], layout_override: Dict[str, Any] | None = No
 </head>
 <body>
   {render_profile(data.get("profile", {}), cols)}
-  {spacer}
+  {render_profile_links(data.get("profile", {}).get("links", []), cols)}
   <div class="container">
     <div class="row">
       <div class="{cols[0]}"></div>
@@ -335,7 +370,7 @@ def main(argv: List[str]) -> None:
 
   resume_out = ROOT / (out_path.stem + ".resume" + out_path.suffix)
   resume_layout = {"left": 0, "main": 12, "right": 0}
-  resume_html = build_page(data, layout_override=resume_layout)
+  resume_html = build_page(data, layout_override=resume_layout, include_analytics=False)
   resume_out.write_text(resume_html, encoding="utf-8")
   print(f"Wrote {resume_out}")
 

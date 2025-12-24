@@ -2,6 +2,17 @@
 <html lang="en">
 
 <head>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-E5MXQCZSSN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-E5MXQCZSSN');
+  </script>
+
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="This site is built by bootstrap v5.3.2">
@@ -39,12 +50,7 @@
               <span class="profile__meta">Nanjing University<br /></span>
               <span class="profile__contact">mingxinli@smail.nju.edu.cn<br /></span>
               <span class="profile__contact">mingxinli.cs@gmail.com<br /></span>
-              <div class="profile__links">
-                <!-- <a class="link-accent profile__link" href="./files/resume_eng.pdf" target="_blank"
-                    rel="noopener noreferrer" aria-label="Open CV in a new tab">CV</a> -->
-                <a class="link-accent profile__link" href="https://github.com/chasecheese" target="_blank"
-                  rel="noopener noreferrer" aria-label="Open GitHub profile in a new tab">GitHub</a>
-              </div>
+              
             </div>
           </div>
         </div>
@@ -57,7 +63,22 @@
   </div>
 
   <!-- space 1 row -->
-  <div class="row"><p></p></div>
+  <!-- <div class="row"><p></p></div> -->
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <div class="profile__links">
+          <a class="link-accent profile__link" href="https://github.com/chasecheese" target="_blank"
+            rel="noopener noreferrer" aria-label="Open GitHub profile in a new tab">GitHub</a>
+          <a class="link-accent profile__link" href="./files/resume.pdf" target="_blank"
+              rel="noopener noreferrer" aria-label="Open CV in a new tab">CV</a>
+        </div>
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+  </div>
 
   <!-- horizontal line -->
   <div class="container">
@@ -134,7 +155,7 @@
               </span>
               <span class="timeline__date">2025.07 - Present</span>
             </span>
-            <span class="timeline__role">Intern@Research Group, Luoshen Cloud Networking</span>
+            <span class="timeline__role">Intern@Research Team, Department of LuoShen Cloud Network</span>
           </div>
 
           <div class="timeline__item">
