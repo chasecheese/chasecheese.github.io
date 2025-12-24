@@ -13,6 +13,7 @@ Stages (inclusive):
 
 from __future__ import annotations
 
+import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -33,8 +34,8 @@ def generate() -> None:
 
 
 def deploy_outputs() -> None:
-  (ROOT / "index.generate.html").replace(ROOT / "index.html")
-  (ROOT / "index.generate.resume.pdf").replace(ROOT / "files" / "resume.pdf")
+  shutil.copyfile(ROOT / "index.generate.html", ROOT / "index.html")
+  shutil.copyfile(ROOT / "index.generate.resume.pdf", ROOT / "files" / "resume.pdf")
 
 
 def main(argv: list[str]) -> None:
