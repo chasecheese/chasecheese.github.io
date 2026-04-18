@@ -53,8 +53,8 @@ Plain JSON — your CV.
 
 | Key | Type | Notes |
 | --- | --- | --- |
-| `profile.name` / `avatar` / `titles[]` / `emails[]` | — | Hero block |
-| `profile.links[]` | `{label, url}` | Links row under the hero |
+| `profile.name` / `avatar` / `titles[]` / `emails[]` | — | Profile header at the top of the page |
+| `profile.links[]` | `{label, url}` | Links row under the profile header |
 | `research_interests[]` | `str` \| `{text, url?}` | String shorthand when no link needed |
 | `experience[]` / `education[]` | `{org, logo, date, roles[]}` | Timeline entries |
 | `publications[]` | `{abbr, title, venue, authors[], link?, tag?}` | `tag` defaults to `[abbr]` when omitted |
