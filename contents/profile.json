@@ -12,8 +12,9 @@
       "mingxinli.cs@gmail.com"
     ],
     "links": [
+      { "label": "Homepage", "url": "https://mingxin.site" },
       { "label": "GitHub", "url": "https://github.com/chasecheese" },
-      { "label": "CV", "url": "./files/resume.pdf" }
+      { "label": "CV", "url": "https://mingxin.site/files/resume.pdf" }
     ]
   },
 
