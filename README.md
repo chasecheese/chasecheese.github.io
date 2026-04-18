@@ -10,6 +10,7 @@ Homepage is generated from JSON frontmatter + templates. Use the helper scripts 
 ## Content configuration (`contents/index.md`)
 Frontmatter fields drive the page:
 - `layout.left|main|right` — bootstrap column widths
+- `layout.spacers` — number of blank rows between sections (default 2; resume override uses 1)
 - `icon_emoji` — favicon emoji
 - `analytics_html` — raw analytics snippet (e.g., GA). Leave empty to skip, or replace GA ID here
 - `profile.name|avatar|titles[]|emails[]`
@@ -27,8 +28,11 @@ Edit the JSON frontmatter, then run one of the deploy stages.
 - `scripts/render_pdf.py` — renders HTML to PDF (uses Playwright/Chromium)
 - `scripts/deploy.py` — orchestrates build/generate/deploy stages
 
-Prereqs: Python 3; for PDF, install Playwright once:
+Prereqs: Python 3.12 via [uv](https://docs.astral.sh/uv/). Set up once:
 ```
-pip install playwright
+uv venv --python 3.12
+source .venv/bin/activate
+uv pip install playwright
 python -m playwright install chromium
 ```
+`deploy.py` auto-detects `.venv/bin/python`, so you can run it without activating the venv.
