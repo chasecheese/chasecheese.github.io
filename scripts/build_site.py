@@ -284,10 +284,16 @@ def render_footer(note: str, cols: Tuple[str, str, str]) -> str:
   """
 
 
-def build_page(data: Dict[str, Any], layout_override: Dict[str, Any] | None = None, include_analytics: bool = True) -> str:
+def build_page(
+    data: Dict[str, Any],
+    layout_override: Dict[str, Any] | None = None,
+    include_analytics: bool = True,
+) -> str:
+  layout = layout_override or data.get("layout", {})
   spacer = '<div class="row"><p></p></div>'
-  double_spacer = spacer + "\n" + spacer
-  cols = col_classes(layout_override or data.get("layout", {}))
+  spacer_count = int(layout.get("spacers", 2))
+  section_gap = "\n".join([spacer] * max(spacer_count, 0))
+  cols = col_classes(layout)
   icon_href = favicon_data_url(data.get("icon_emoji") or data.get("favicon_emoji") or "🌐")
   ga_script = ""
   if include_analytics:
@@ -335,19 +341,19 @@ def build_page(data: Dict[str, Any], layout_override: Dict[str, Any] | None = No
       <div class="{cols[2]}"></div>
     </div>
   </div>
-  {double_spacer}
+  {section_gap}
   {render_interests(data.get("research_interests", []), cols)}
-  {double_spacer}
+  {section_gap}
   {render_timeline("Experience", data.get("experience", []), cols)}
-  {double_spacer}
+  {section_gap}
   {render_timeline("Education", data.get("education", []), cols)}
-  {double_spacer}
+  {section_gap}
   {render_publications(data.get("publications", []), cols)}
-  {double_spacer}
+  {section_gap}
   {render_list_section("Teaching Assistant", data.get("teaching_assistant", []), "ta-list__item", cols)}
-  {double_spacer}
+  {section_gap}
   {render_list_section("Awards and Honors", data.get("awards", []), "award-list__item", cols)}
-  {double_spacer}
+  {section_gap}
   {render_footer(data.get("footer_note", ""), cols)}
 </body>
 </html>
@@ -369,7 +375,7 @@ def main(argv: List[str]) -> None:
   print(f"Wrote {out_path}")
 
   resume_out = ROOT / (out_path.stem + ".resume" + out_path.suffix)
-  resume_layout = {"left": 0, "main": 12, "right": 0}
+  resume_layout = {"left": 0, "main": 12, "right": 0, "spacers": 1}
   resume_html = build_page(data, layout_override=resume_layout, include_analytics=False)
   resume_out.write_text(resume_html, encoding="utf-8")
   print(f"Wrote {resume_out}")

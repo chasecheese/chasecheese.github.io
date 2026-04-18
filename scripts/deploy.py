@@ -21,16 +21,21 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 
 
+def python_bin() -> str:
+  venv_py = ROOT / ".venv" / "bin" / "python"
+  return str(venv_py) if venv_py.exists() else sys.executable
+
+
 def run(cmd: list[str]) -> None:
   subprocess.run(cmd, check=True, cwd=str(ROOT))
 
 
 def build() -> None:
-  run([sys.executable, str(ROOT / "scripts" / "build_site.py"), str(ROOT / "contents" / "index.md")])
+  run([python_bin(), str(ROOT / "scripts" / "build_site.py"), str(ROOT / "contents" / "index.md")])
 
 
 def generate() -> None:
-  run([sys.executable, str(ROOT / "scripts" / "render_pdf.py"), str(ROOT / "index.generate.resume.html")])
+  run([python_bin(), str(ROOT / "scripts" / "render_pdf.py"), str(ROOT / "index.generate.resume.html")])
 
 
 def deploy_outputs() -> None:

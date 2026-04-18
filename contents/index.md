@@ -70,7 +70,7 @@
     {
       "tag": "[NSDI'26]",
       "title": "CStar Gateway: Augmenting Public Cloud Infrastructure for Heterogeneous Network Function Virtualization",
-      "link": null,
+      "link": "https://www.usenix.org/conference/nsdi26/presentation/li-haonan",
       "authors": [
         { "name": "Haonan Li" },
         { "name": "Tian Pan" },
@@ -105,7 +105,7 @@
     {
       "tag": "[NSDI'26]",
       "title": "Bifrost: Alibaba’s Next-Generation VPC Network with High-Performance Multipath Reliable Transport",
-      "link": null,
+      "link": "https://www.usenix.org/conference/nsdi26/presentation/fan",
       "authors": [
         { "name": "Zihao Fan" },
         { "name": "Xing Li" },
@@ -140,7 +140,7 @@
       "abbr": "NSDI'26"
     },
     {
-      "tag": "[IEEE TKDE'24]",
+      "tag": "[TKDE'24]",
       "title": "A Survey of Multi-Dimensional Indexes: Past and Future Trends",
       "link": "https://doi.org/10.1109/TKDE.2024.3364183",
       "authors": [
