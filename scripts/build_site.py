@@ -240,7 +240,7 @@ def render_publications(entries: List[Dict[str, Any]], cols: Tuple[str, str, str
         f"""
           <div class="publication__item">
             <b><span class="publication__tag">{esc(tag)}</span></b>
-            <b class="publication__title">{esc(entry.get("title"))}</b>
+            <span class="publication__title">{esc(entry.get("title"))}</span>
             {link_html}
             <br />
             {"".join(authors_html)}
