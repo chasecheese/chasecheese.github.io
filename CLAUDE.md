@@ -26,7 +26,7 @@ uv pip install -e .
 
 ```
 contents/profile.json    # PERSONAL data — profile, experience, education, publications, etc.
-contents/site.json       # SITE CHROME — layouts, icon_emoji, footer_note
+contents/site.json       # SITE CHROME — layouts, icon_emoji, footer_emoji, footer_note
 contents/analytics.html  # OPTIONAL raw <script> snippet (injected into main page only)
 scripts/build_site.py    # profile.json + site.json + analytics.html -> HTML
 scripts/render_pdf.py    # HTML -> PDF via headless Chromium
@@ -55,6 +55,7 @@ Do not commit `index.generate.*`.
 - `publications[].tag` defaults to `[{abbr}]` when omitted; only set explicitly when the display should differ from the abbreviation (e.g. `abbr: "IEEE TKDE'24"`, `tag: "[TKDE'24]"`).
 - `research_interests[]` accepts bare strings; upgrade to `{text, url}` only when a link is needed.
 - `site.json` `layout` and `resume_layout` are **shallow-merged** over `DEFAULT_MAIN_LAYOUT` / `DEFAULT_RESUME_LAYOUT` in `build_site.py`. Users can override just a subset of keys (e.g. only `spacers`).
+- `site.json` `footer_emoji` defaults to `"🌈"` when missing; an empty string suppresses the prefix entirely (footer renders without a leading glyph or space).
 
 ## CSS ↔ Python coupling
 

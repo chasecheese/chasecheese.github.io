@@ -1,103 +1,148 @@
-# Personal homepage + résumé generator
+# Personal Homepage Template
 
-Static personal homepage + PDF résumé, generated from a handful of content and config files.
+A small static-site template for a personal academic homepage and PDF CV. The
+site is generated from JSON content files, so most updates only require editing
+your profile data instead of touching HTML.
 
-## Quick start
+## First-Time Setup
 
-Edit the content files under `contents/`, then run:
-
-```sh
-.venv/bin/python scripts/deploy.py           # full: build + pdf + publish
-.venv/bin/python scripts/deploy.py build     # just regenerate *.generate.html
-.venv/bin/python scripts/deploy.py generate  # build + resume PDF, no publish
-```
-
-`deploy.py` auto-detects `.venv/bin/python`, so you do not need to activate the venv first.
-
-## One-time setup
-
-Requires [uv](https://docs.astral.sh/uv/) and Python 3.12:
+This project uses Python 3.12 and Playwright for PDF generation.
 
 ```sh
 uv venv --python 3.12
-uv pip install -e .          # or: uv pip install playwright
+uv pip install -e .
 .venv/bin/python -m playwright install chromium
 ```
 
-## Project layout
+After setup, you can use `scripts/deploy.py` for the normal workflow. The script
+will automatically use `.venv/bin/python` when it exists.
 
-```text
-contents/profile.json         # your CV data — personal content
-contents/site.json            # site chrome: layouts, favicon, footer
-contents/analytics.html       # analytics snippet injected verbatim into main page
-scripts/build_site.py         # contents -> HTML (main + resume layouts)
-scripts/render_pdf.py         # HTML -> PDF via headless Chromium
-scripts/deploy.py             # build / generate / deploy orchestrator
-styles/site.css               # site-specific CSS on top of Bootstrap
-bootstrap-5.3.2-dist/         # vendored Bootstrap (offline PDF rendering needs it)
-fonts/                        # Fira Sans woff2 files used by site.css
-files/                        # avatars, logos, and the published resume.pdf
-index.html                    # deployed homepage (copied from index.generate.html)
-index.generate*.{html,pdf}    # build artifacts (gitignored)
+## Customize The Template
+
+1. Edit `contents/profile.json` with your name, links, education, experience,
+   publications, teaching, and awards.
+2. Put your images and other public files in `files/`, then reference them from
+   `profile.json`.
+3. Adjust site-level settings in `contents/site.json`.
+4. Build the site:
+
+```sh
+.venv/bin/python scripts/deploy.py build
 ```
 
-Content is split by concern so you never have to mix "my data" with "how the site renders":
+Open `index.generate.html` in a browser to preview the generated page.
 
-- **`contents/profile.json`** — your profile, experience, education, publications, etc.
-- **`contents/site.json`** — layout widths, section spacing, favicon emoji, footer line.
-- **`contents/analytics.html`** — whatever `<script>` your analytics provider gives you.
+## Common Commands
 
-## `contents/profile.json` (personal data)
+```sh
+.venv/bin/python scripts/deploy.py build
+.venv/bin/python scripts/deploy.py generate
+.venv/bin/python scripts/deploy.py
+```
 
-Plain JSON — your CV.
+- `build` regenerates the HTML preview files.
+- `generate` also renders the PDF CV.
+- The default command builds, renders the PDF, and copies the publishable files
+  into place.
 
-| Key | Type | Notes |
-| --- | --- | --- |
-| `profile.name` / `avatar` / `titles[]` / `emails[]` | — | Profile header at the top of the page |
-| `profile.links[]` | `{label, url}` | Links row under the profile header |
-| `research_interests[]` | `str` \| `{text, url?}` | String shorthand when no link needed |
-| `experience[]` / `education[]` | `{org, logo, date, roles[]}` | Timeline entries |
-| `publications[]` | `{abbr, title, venue, authors[], link?, tag?}` | `tag` defaults to `[abbr]` when omitted |
-| `teaching_assistant[]` / `awards[]` | `{title, date}` | Simple list rows |
+## What To Edit
 
-### Author entries
+```text
+contents/profile.json    # Your personal content
+contents/site.json       # Site settings such as layout, icon, and footer text
+contents/analytics.html  # Optional analytics snippet
+files/                   # Public assets such as avatar, logos, and PDFs
+styles/site.css          # Visual styling
+```
 
-`publications[].authors[]` accepts either:
+Most template users only need `contents/profile.json`, `contents/site.json`, and
+`files/`. Edit `styles/site.css` when you want to change the visual design.
 
-- a bare string — `"Co-author Name"` (for co-authors)
-- an object — `{ "name": "Your Name", "self": true }` (to highlight yourself)
+## Content Format
 
-Marking `self` is explicit on purpose: author names in papers don't always match your profile name exactly, so a local per-entry flag is more reliable than implicit name matching.
+`contents/profile.json` is the main source of truth for the page. It supports
+these sections:
 
-## `contents/site.json` (site chrome)
+| Field | Purpose |
+| --- | --- |
+| `profile` | Name, avatar, titles, email addresses, and profile links |
+| `research_interests` | Short text items, optionally with links |
+| `experience` | Timeline entries with organization, logo, date, and roles |
+| `education` | Timeline entries with school, logo, date, and degree/advisor text |
+| `publications` | Publication title, venue, authors, link, and display tag |
+| `teaching_assistant` | Simple title/date rows |
+| `awards` | Simple title/date rows |
 
-| Key | Type | Notes |
-| --- | --- | --- |
-| `icon_emoji` | str | Favicon glyph (rendered as SVG data URL) |
-| `footer_note` | str | Footer text after the 🌈 |
-| `layout.left` / `main` / `right` | int | Bootstrap col widths for main page (sum ≤ 12) |
-| `layout.spacers` | int | Blank rows between sections on main page |
-| `resume_layout` | same shape as `layout` | Override used when rendering the résumé HTML |
+Authors in `publications[].authors` can be written as plain strings:
 
-Both layouts are merged over built-in defaults (`main: {1,10,1,spacers:2}`, `resume: {0,12,0,spacers:1}`), so you can override just the fields you care about.
+```json
+"Jane Doe"
+```
 
-## `contents/analytics.html` (optional)
+Use an object when you want to highlight yourself:
 
-Injected verbatim into the `<head>` of the main page (never the résumé). Paste whatever snippet your provider gives you — Google Analytics, Plausible, Umami, a custom script — into that file, or delete the file to disable analytics entirely.
+```json
+{ "name": "Your Name", "self": true }
+```
 
-## Deploy flow
+Research interests can also be plain strings, or objects when a link is useful:
 
-`scripts/deploy.py` runs staged pipelines keyed by the CLI arg:
+```json
+{ "text": "Systems", "url": "https://example.com" }
+```
 
-1. **build** — `build_site.py` reads `contents/` and writes `index.generate.html` (main) and `index.generate.resume.html` (full-width).
-2. **generate** — `render_pdf.py` turns the resume HTML into `index.generate.resume.pdf`.
-3. **deploy** — copies `index.generate.html` → `index.html` and `index.generate.resume.pdf` → `files/resume.pdf`.
+## Site Settings
 
-Only `index.html` and `files/resume.pdf` are served by GitHub Pages; the `*.generate.*` intermediates are gitignored.
+`contents/site.json` controls settings that are not personal CV content:
+
+| Field | Purpose |
+| --- | --- |
+| `icon_emoji` | Emoji used for the browser favicon |
+| `footer_emoji` | Emoji prefix shown before the footer text (empty string to disable) |
+| `footer_note` | Footer text |
+| `layout` | Column layout and section spacing for the web page |
+| `resume_layout` | Layout override for the PDF CV HTML |
+
+The layout fields are Bootstrap column widths. Keep `left + main + right` within
+12.
+
+## Generated Files
+
+The build scripts create intermediate files:
+
+```text
+index.generate.html
+index.generate.resume.html
+index.generate.resume.pdf
+```
+
+The publishable files are:
+
+```text
+index.html
+files/resume.pdf
+```
+
+For GitHub Pages, commit the publishable files after running the default deploy
+command.
+
+## Project Layout
+
+```text
+scripts/build_site.py   # JSON content -> HTML
+scripts/render_pdf.py   # HTML -> PDF
+scripts/deploy.py       # Build / generate / publish workflow
+styles/site.css         # Site-specific CSS
+bootstrap-5.3.2-dist/   # Local Bootstrap files used by the generated page
+fonts/                  # Local web fonts
+templates/              # Optional/reference template files
+```
 
 ## Troubleshooting
 
-- **Playwright missing** — rerun the one-time setup; confirm `.venv/bin/playwright` exists.
-- **Chromium not installed** — `.venv/bin/python -m playwright install chromium`.
-- **Fonts look wrong in PDF** — `render_pdf.py` waits for `networkidle`; make sure the woff2 files under `fonts/` are reachable from the HTML path.
-- **Change analytics provider** — replace the snippet in `contents/analytics.html`.
+- If PDF generation fails because Chromium is missing, run
+  `.venv/bin/python -m playwright install chromium`.
+- If fonts or images look wrong, check that the paths in `profile.json` point to
+  files that exist in the repository.
+- If `index.html` looks stale, run the default deploy command instead of only
+  running `build`.

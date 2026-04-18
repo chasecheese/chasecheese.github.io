@@ -311,15 +311,16 @@ def render_list_section(
   """
 
 
-def render_footer(note: str, cols: Tuple[str, str, str]) -> str:
+def render_footer(note: str, emoji: str, cols: Tuple[str, str, str]) -> str:
   left_col, _, right_col = cols
+  prefix = f"{esc(emoji)} " if emoji else ""
   return f"""
   <div class="container">
     <div class="row">
       <div class="{left_col}"></div>
       <footer class="text-center">
         <div>
-          <span class="footer__note">&#127752; {esc(note)}</span>
+          <span class="footer__note">{prefix}{esc(note)}</span>
         </div>
       </footer>
       <div class="{right_col}"></div>
@@ -333,6 +334,7 @@ def build_page(
     layout: Dict[str, Any],
     icon_emoji: str = "🌐",
     footer_note: str = "",
+    footer_emoji: str = "🌈",
     analytics_path: Path | None = None,
 ) -> str:
   spacer = '<div class="row"><p></p></div>'
@@ -383,7 +385,7 @@ def build_page(
   {section_gap}
   {render_list_section("Awards and Honors", data.get("awards", []), "award-list", cols)}
   {section_gap}
-  {render_footer(footer_note, cols)}
+  {render_footer(footer_note, footer_emoji, cols)}
 </body>
 </html>
 """
@@ -410,17 +412,19 @@ def main(argv: List[str]) -> None:
   resume_layout = {**DEFAULT_RESUME_LAYOUT, **(site.get("resume_layout") or {})}
   icon_emoji = site.get("icon_emoji") or "🌐"
   footer_note = site.get("footer_note", "")
+  footer_emoji = site.get("footer_emoji", "🌈")
 
   out_path.write_text(
       build_page(data, main_layout, icon_emoji=icon_emoji, footer_note=footer_note,
-                 analytics_path=DEFAULT_ANALYTICS_FILE),
+                 footer_emoji=footer_emoji, analytics_path=DEFAULT_ANALYTICS_FILE),
       encoding="utf-8",
   )
   print(f"Wrote {out_path}")
 
   resume_out = ROOT / (out_path.stem + ".resume" + out_path.suffix)
   resume_out.write_text(
-      build_page(data, resume_layout, icon_emoji=icon_emoji, footer_note=footer_note),
+      build_page(data, resume_layout, icon_emoji=icon_emoji, footer_note=footer_note,
+                 footer_emoji=footer_emoji),
       encoding="utf-8",
   )
   print(f"Wrote {resume_out}")
