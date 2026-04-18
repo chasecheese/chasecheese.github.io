@@ -1,4 +1,4 @@
-# chasecheese.github.io
+# Personal homepage + résumé generator
 
 Static personal homepage + PDF résumé, generated from a handful of content and config files.
 
@@ -64,10 +64,10 @@ Plain JSON — your CV.
 
 `publications[].authors[]` accepts either:
 
-- a bare string — `"Haonan Li"` (for co-authors)
-- an object — `{ "name": "Mingxin Li", "self": true }` (to highlight yourself)
+- a bare string — `"Co-author Name"` (for co-authors)
+- an object — `{ "name": "Your Name", "self": true }` (to highlight yourself)
 
-Marking `self` is explicit on purpose: author names in papers don't always match your profile name exactly, and fork-users need a clear, local signal instead of implicit name matching.
+Marking `self` is explicit on purpose: author names in papers don't always match your profile name exactly, so a local per-entry flag is more reliable than implicit name matching.
 
 ## `contents/site.json` (site chrome)
 
