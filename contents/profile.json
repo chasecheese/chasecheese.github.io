@@ -1,0 +1,127 @@
+{
+  "profile": {
+    "name": "Mingxin Li",
+    "avatar": "./files/avator.png",
+    "titles": [
+      "Ph.D. Student",
+      "School of Computer Science",
+      "Nanjing University"
+    ],
+    "emails": [
+      "mingxinli@smail.nju.edu.cn",
+      "mingxinli.cs@gmail.com"
+    ],
+    "links": [
+      { "label": "GitHub", "url": "https://github.com/chasecheese" },
+      { "label": "CV", "url": "./files/resume.pdf" }
+    ]
+  },
+
+  "research_interests": [
+    "Systems and Networking",
+    "Network4AI",
+    { "text": "extended Berkeley Packet Filter (eBPF)", "url": "https://ebpf.io/" }
+  ],
+
+  "experience": [
+    {
+      "org": "Alibaba Cloud",
+      "logo": "./files/alibabacloud.png",
+      "date": "2025.07 - Present",
+      "roles": ["Intern@Research Team, Department of Cloud Network"]
+    },
+    {
+      "org": "Harbin Institute of Technology",
+      "logo": "./files/hit.png",
+      "date": "2020.01 - 2022.06",
+      "roles": ["Research Assistant@Blockchain Research Group, Faculty of Computing"]
+    }
+  ],
+
+  "education": [
+    {
+      "org": "Nanjing University",
+      "logo": "./files/nju.png",
+      "date": "2022.09 - Present",
+      "roles": [
+        "Ph.D. Student in Computer Science and Technology",
+        "Advisor: Prof. Guihai Chen"
+      ]
+    },
+    {
+      "org": "Harbin Institute of Technology",
+      "logo": "./files/hit.png",
+      "date": "2018.09 - 2022.06",
+      "roles": ["B.E. in Software Engineering"]
+    }
+  ],
+
+  "publications": [
+    {
+      "tag": "[NSDI'26]",
+      "abbr": "NSDI'26",
+      "title": "CStar Gateway: Augmenting Public Cloud Infrastructure for Heterogeneous Network Function Virtualization",
+      "link": "https://www.usenix.org/conference/nsdi26/presentation/li-haonan",
+      "venue": "23rd USENIX Symposium on Networked Systems Design and Implementation",
+      "authors": [
+        "Haonan Li", "Tian Pan", "Jin Ke", "Baohai Hu", "Changgang Zheng",
+        "Enge Song", "Zhi Xu", "Ye Yang", "Bowen Yang", "Donglin Lai",
+        "Yisong Qiao", "Bengbeng Xue", "Jianyuan Lu", "Xiaoqing Sun",
+        "Shize Zhang", "Zihao Fan", { "name": "Mingxin Li", "self": true },
+        "Song Yang", "Jun Liang", "Xionglie Wei", "Biao Lyu", "Rong Wen",
+        "Zhigang Zong", "Jiao Zhang", "Tao Huang", "Shunmin Zhu"
+      ]
+    },
+    {
+      "tag": "[NSDI'26]",
+      "abbr": "NSDI'26",
+      "title": "Bifrost: Alibaba’s Next-Generation VPC Network with High-Performance Multipath Reliable Transport",
+      "link": "https://www.usenix.org/conference/nsdi26/presentation/fan",
+      "venue": "23rd USENIX Symposium on Networked Systems Design and Implementation",
+      "authors": [
+        "Zihao Fan", "Xing Li", "Ye Yang", "Bo Jiang", "Bowen Yang",
+        "Yilong Lv", "Yuke Hong", "Yinian Zhou", "Junnan Cai", "Jiayue Xu",
+        "Yunrui Hu", "Zhao Gao", "Ke Sun", "Yimin Liu", "Xiangdong Zhang",
+        "Enge Song", "Jianyuan Lu", "Xiaoqing Sun", "Shize Zhang", "Haonan Li",
+        { "name": "Mingxin Li", "self": true }, "Changgang Zheng", "Song Yang",
+        "Jun Liang", "Biao Lyu", "Rong Wen", "Zhigang Zong", "Shunmin Zhu"
+      ]
+    },
+    {
+      "tag": "[TKDE'24]",
+      "abbr": "TKDE'24",
+      "title": "A Survey of Multi-Dimensional Indexes: Past and Future Trends",
+      "link": "https://doi.org/10.1109/TKDE.2024.3364183",
+      "venue": "IEEE Transactions on Knowledge and Data Engineering",
+      "authors": [
+        { "name": "Mingxin Li", "self": true }, "Hancheng Wang", "Haipeng Dai",
+        "Meng Li", "Chengliang Chai", "Rong Gu", "Feng Chen", "Zhiyuan Chen",
+        "Shuaituan Li", "Qizhi Liu", "Guihai Chen"
+      ]
+    },
+    {
+      "tag": "[BlockSys'22]",
+      "abbr": "BlockSys'22",
+      "title": "Latency Analysis for Raft Consensus on Hyperledger Fabric",
+      "link": "https://doi.org/10.1007/978-981-19-8043-5_12",
+      "venue": "International Conference on Blockchain and Trustworthy Systems",
+      "authors": [
+        "Xuefeng Piao", { "name": "Mingxin Li", "self": true },
+        "Fanchao Meng", "Huihui Song"
+      ]
+    }
+  ],
+
+  "teaching_assistant": [
+    { "title": "Introduction to Databases", "date": "Fall, 2024" },
+    { "title": "Distributed Networks", "date": "Fall, 2023" }
+  ],
+
+  "awards": [
+    { "title": "Excellent Graduate Student", "date": "2024" },
+    { "title": "Jiangsu Financial Leasing Scholarship", "date": "2024" },
+    { "title": "Presidential Special Scholarship", "date": "2022" },
+    { "title": "Excellent Student Scholarship", "date": "2021, 2020, 2019" },
+    { "title": "National Scholarship (Top 1.5%)", "date": "2019" }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "icon_emoji": "🌈",
+  "footer_note": "Last updated: Dec 2025",
+  "layout":        { "left": 1, "main": 10, "right": 1, "spacers": 2 },
+  "resume_layout": { "left": 0, "main": 12, "right": 0, "spacers": 2 }
+}

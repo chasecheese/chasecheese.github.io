@@ -15,30 +15,6 @@
 }
 
 @font-face {
-  font-family: "fira-sans-bold";
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url("../fonts/FiraSans-Bold.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "fira-sans-italic";
-  font-style: italic;
-  font-weight: 400;
-  font-display: swap;
-  src: url("../fonts/FiraSans-Italic.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "fira-sans-thin";
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("../fonts/FiraSans-Thin.woff2") format("woff2");
-}
-
-@font-face {
   font-family: "fira-sans-ultra-light";
   font-style: normal;
   font-weight: 400;
@@ -88,6 +64,10 @@ a {
 .link-plain {
   color: inherit;
   font-family: "fira-sans-light", sans-serif;
+}
+
+.profile__avatar {
+  width: 180px;
 }
 
 .profile__meta,
@@ -189,21 +169,12 @@ a {
   float: right;
 }
 
-.ta-list {
-  padding: 0;
-}
-
-.ta-list__item {
-  display: flex;
-  justify-content: space-between;
-  font-size: 16px;
-  font-family: "fira-sans-light", sans-serif;
-}
-
+.ta-list,
 .award-list {
   padding: 0;
 }
 
+.ta-list__item,
 .award-list__item {
   display: flex;
   justify-content: space-between;
