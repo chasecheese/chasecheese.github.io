@@ -140,7 +140,7 @@ def render_profile_links(links: List[Dict[str, Any]], cols: Tuple[str, str, str]
   """
 
 
-def render_interests(items: List[Any], cols: Tuple[str, str, str]) -> str:
+def render_interests(items: List[Any], cols: Tuple[str, str, str], title: str = "Research Interests") -> str:
   left_col, main_col, right_col = cols
   interests = []
   for raw in items:
@@ -158,7 +158,7 @@ def render_interests(items: List[Any], cols: Tuple[str, str, str]) -> str:
     <div class="row">
       <div class="{left_col}"></div>
       <div class="{main_col}">
-        <h2>Research Interests</h2>
+        <h2>{esc(title)}</h2>
       </div>
       <div class="{right_col}"></div>
     </div>
@@ -217,7 +217,7 @@ def render_timeline(title: str, entries: List[Dict[str, Any]], cols: Tuple[str, 
   """
 
 
-def render_publications(entries: List[Dict[str, Any]], cols: Tuple[str, str, str]) -> str:
+def render_publications(entries: List[Dict[str, Any]], cols: Tuple[str, str, str], title: str = "Publications") -> str:
   left_col, main_col, right_col = cols
   items_html = []
   for entry in entries:
@@ -255,7 +255,7 @@ def render_publications(entries: List[Dict[str, Any]], cols: Tuple[str, str, str
     <div class="row">
       <div class="{left_col}"></div>
       <div class="{main_col}">
-        <h2>Publications</h2>
+        <h2>{esc(title)}</h2>
       </div>
       <div class="{right_col}"></div>
     </div>
@@ -337,6 +337,15 @@ def build_page(
     footer_emoji: str = "🌈",
     analytics_path: Path | None = None,
 ) -> str:
+  DEFAULT_LABELS = {
+      "research_interests": "Research Interests",
+      "experience": "Experience",
+      "education": "Education",
+      "publications": "Publications",
+      "teaching_assistant": "Teaching Assistant",
+      "awards": "Awards and Honors",
+  }
+  labels = {**DEFAULT_LABELS, **(data.get("labels") or {})}
   spacer = '<div class="row"><p></p></div>'
   spacer_count = max(int(layout.get("spacers", 2)), 0)
   section_gap = "\n".join([spacer] * spacer_count)
@@ -344,8 +353,9 @@ def build_page(
   icon_href = favicon_data_url(icon_emoji)
   ga_script = read_analytics_snippet(analytics_path)
   profile = data.get("profile", {})
+  lang = data.get("lang", "en")
   return f"""<!doctype html>
-<html lang="en">
+<html lang="{lang}">
 <head>
 {ga_script}
   <meta charset="utf-8">
@@ -373,17 +383,17 @@ def build_page(
     </div>
   </div>
   {section_gap}
-  {render_interests(data.get("research_interests", []), cols)}
+  {render_interests(data.get("research_interests", []), cols, labels["research_interests"])}
   {section_gap}
-  {render_timeline("Experience", data.get("experience", []), cols)}
+  {render_timeline(labels["experience"], data.get("experience", []), cols)}
   {section_gap}
-  {render_timeline("Education", data.get("education", []), cols)}
+  {render_timeline(labels["education"], data.get("education", []), cols)}
   {section_gap}
-  {render_publications(data.get("publications", []), cols)}
+  {render_publications(data.get("publications", []), cols, labels["publications"])}
   {section_gap}
-  {render_list_section("Teaching Assistant", data.get("teaching_assistant", []), "ta-list", cols)}
+  {render_list_section(labels["teaching_assistant"], data.get("teaching_assistant", []), "ta-list", cols)}
   {section_gap}
-  {render_list_section("Awards and Honors", data.get("awards", []), "award-list", cols)}
+  {render_list_section(labels["awards"], data.get("awards", []), "award-list", cols)}
   {section_gap}
   {render_footer(footer_note, footer_emoji, cols)}
 </body>

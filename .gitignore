@@ -16,3 +16,6 @@ __pycache__/
 index.generate.html
 index.generate.resume.html
 index.generate.resume.pdf
+index.generate.zh.html
+index.generate.zh.resume.html
+index.generate.zh.resume.pdf
