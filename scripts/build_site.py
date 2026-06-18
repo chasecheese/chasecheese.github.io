@@ -264,10 +264,16 @@ def render_publications(entries: List[Dict[str, Any]], cols: Tuple[str, str, str
             f'<span class="publication__more" role="button" '
             f"onclick=\"this.style.display='none';"
             f"var p=this.closest('.publication__authors');"
-            f"var h=p.querySelectorAll('.publication__author-hidden');"
+            f"var w=p.querySelector('.publication__hidden-wrap');"
+            f"w.style.display='';"
+            f"var h=w.querySelectorAll('.publication__author-hidden');"
             f"h.forEach(function(e,i){{e.style.display='';e.style.opacity='0';"
             f"setTimeout(function(){{e.style.opacity='1'}},i*40)}})\">"
             f"and {hidden_count} more</span>"
+            f'<span class="publication__hidden-wrap" style="display:none" role="button" '
+            f"onclick=\"this.style.display='none';"
+            f"this.querySelectorAll('.publication__author-hidden').forEach(function(e){{e.style.display='none'}});"
+            f"this.closest('.publication__authors').querySelector('.publication__more').style.display=''\">"
         )
 
       if is_hidden:
@@ -288,6 +294,9 @@ def render_publications(entries: List[Dict[str, Any]], cols: Tuple[str, str, str
           author_parts.append(f'<span class="publication__author--self"><b><u>{name}</u></b></span>{sep}')
         else:
           author_parts.append(f'<span class="publication__author">{name}</span>{sep}')
+
+    if need_collapse:
+      author_parts.append('</span>')
 
     venue = esc(entry.get("venue", ""))
 

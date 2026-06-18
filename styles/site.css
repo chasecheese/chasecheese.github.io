@@ -191,6 +191,13 @@ a {
   margin-left: 0.3em;
 }
 
+.publication__hidden-wrap {
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-style: dashed;
+  color: #023c9f;
+}
+
 .publication__venue {
   font-size: 16px;
   font-family: "fira-sans-light", sans-serif;
