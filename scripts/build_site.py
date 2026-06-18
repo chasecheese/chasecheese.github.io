@@ -243,7 +243,7 @@ def render_publications(entries: List[Dict[str, Any]], cols: Tuple[str, str, str
     else:
       title_html = title
 
-    badge_html = f'<b class="publication__badge">{esc(abbr)}</b> / ' if abbr else ""
+    badge_html = f'<b class="publication__badge">{esc(abbr)} / </b>' if abbr else ""
 
     authors = [normalize_author(a) for a in entry.get("authors", [])]
     max_visible = 10
