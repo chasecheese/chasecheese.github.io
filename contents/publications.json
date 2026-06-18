@@ -47,7 +47,7 @@
     "abbr": "NSDI'26",
     "title": "CStar Gateway: Augmenting Public Cloud Infrastructure for Heterogeneous Network Function Virtualization",
     "link": "https://www.usenix.org/conference/nsdi26/presentation/li-haonan",
-    "venue": "23rd USENIX Symposium on Networked Systems Design and Implementation",
+    "venue": "The 23rd USENIX Symposium on Networked Systems Design and Implementation",
     "authors": [
       "Haonan Li", "Tian Pan", "Jin Ke", "Baohai Hu", "Changgang Zheng",
       "Enge Song", "Zhi Xu", "Ye Yang", "Bowen Yang", "Donglin Lai",
@@ -92,7 +92,7 @@
     "abbr": "BlockSys'22",
     "title": "Latency Analysis for Raft Consensus on Hyperledger Fabric",
     "link": "https://doi.org/10.1007/978-981-19-8043-5_12",
-    "venue": "4th International Conference on Blockchain and Trustworthy Systems",
+    "venue": "The 4th International Conference on Blockchain and Trustworthy Systems",
     "authors": [
       "Xuefeng Piao", { "name": "Mingxin Li", "self": true },
       "Fanchao Meng", "Huihui Song"
