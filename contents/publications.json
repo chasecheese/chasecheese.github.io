@@ -63,7 +63,7 @@
     "abbr": "NSDI'26",
     "title": "Bifrost: Alibaba's Next-Generation VPC Network with High-Performance Multipath Reliable Transport",
     "link": "https://www.usenix.org/conference/nsdi26/presentation/fan",
-    "venue": "23rd USENIX Symposium on Networked Systems Design and Implementation",
+    "venue": "The 23rd USENIX Symposium on Networked Systems Design and Implementation",
     "authors": [
       "Zihao Fan", "Xing Li", "Ye Yang", "Bo Jiang", "Bowen Yang",
       "Yilong Lv", "Yuke Hong", "Yinian Zhou", "Junnan Cai", "Jiayue Xu",
