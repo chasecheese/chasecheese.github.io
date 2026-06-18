@@ -28,6 +28,7 @@ from urllib.parse import quote
 ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_INPUT = ROOT / "contents" / "profile.json"
 DEFAULT_ANALYTICS_FILE = ROOT / "contents" / "analytics.html"
+DEFAULT_PUBLICATIONS = ROOT / "contents" / "publications.json"
 DEFAULT_SITE_CONFIG = ROOT / "contents" / "site.json"
 DEFAULT_MAIN_LAYOUT: Dict[str, Any] = {"left": 1, "main": 10, "right": 1, "spacers": 2}
 DEFAULT_RESUME_LAYOUT: Dict[str, Any] = {"left": 0, "main": 12, "right": 0, "spacers": 1}
@@ -140,7 +141,7 @@ def render_profile_links(links: List[Dict[str, Any]], cols: Tuple[str, str, str]
   """
 
 
-def render_interests(items: List[Any], cols: Tuple[str, str, str], title: str = "Research Interests") -> str:
+def render_interests(items: List[Any], cols: Tuple[str, str, str]) -> str:
   left_col, main_col, right_col = cols
   interests = []
   for raw in items:
@@ -158,7 +159,7 @@ def render_interests(items: List[Any], cols: Tuple[str, str, str], title: str = 
     <div class="row">
       <div class="{left_col}"></div>
       <div class="{main_col}">
-        <h2>{esc(title)}</h2>
+        <h2>Research Interests</h2>
       </div>
       <div class="{right_col}"></div>
     </div>
@@ -177,6 +178,18 @@ def render_interests(items: List[Any], cols: Tuple[str, str, str], title: str = 
   """
 
 
+def render_role(role: Any) -> str:
+  if isinstance(role, str):
+    return esc(role)
+  text = esc(role.get("text", ""))
+  for fragment, url in (role.get("links") or {}).items():
+    escaped_fragment = esc(fragment)
+    link = (f'<a class="link-accent" href="{esc(url)}" target="_blank" '
+            f'rel="noopener noreferrer">{escaped_fragment}</a>')
+    text = text.replace(escaped_fragment, link)
+  return text
+
+
 def render_timeline(title: str, entries: List[Dict[str, Any]], cols: Tuple[str, str, str]) -> str:
   left_col, main_col, right_col = cols
   items_html = []
@@ -191,7 +204,7 @@ def render_timeline(title: str, entries: List[Dict[str, Any]], cols: Tuple[str, 
               </span>
               <span class="timeline__date">{esc(entry.get("date"))}</span>
             </span>
-            {''.join(f'<span class="timeline__role">{esc(role)}</span>' for role in entry.get("roles", []))}
+            {''.join(f'<span class="timeline__role">{render_role(role)}</span>' for role in entry.get("roles", []))}
           </div>
         """
     )
@@ -217,37 +230,109 @@ def render_timeline(title: str, entries: List[Dict[str, Any]], cols: Tuple[str, 
   """
 
 
-def render_publications(entries: List[Dict[str, Any]], cols: Tuple[str, str, str], title: str = "Publications") -> str:
+def render_publications(entries: List[Dict[str, Any]], cols: Tuple[str, str, str]) -> str:
   left_col, main_col, right_col = cols
   items_html = []
   for entry in entries:
-    link = entry.get("link")
-    link_html = (
-        f'<a class="link-accent publication__link" target="_blank" href="{esc(link)}" rel="noopener noreferrer">[Link]</a>'
-        if link
-        else '<span class="publication__link link-plain">[Link]</span>'
-    )
-    authors_html = []
-    authors = [normalize_author(a) for a in entry.get("authors", [])]
-    for idx, a in enumerate(authors):
-      cls = "publication__author publication__author--self" if a.get("self") else "publication__author"
-      name = esc(a.get("name"))
-      sep = "" if idx == len(authors) - 1 else ", "
-      authors_html.append(f'<span class="{cls}">{name}{sep}</span>')
     abbr = entry.get("abbr", "")
-    tag = entry.get("tag") or (f"[{abbr}]" if abbr else "")
+    title = esc(entry.get("title"))
+    link = entry.get("link")
+
+    if link:
+      title_html = f'<a class="publication__title-link" href="{esc(link)}" target="_blank" rel="noopener noreferrer">{title}</a>'
+    else:
+      title_html = title
+
+    badge_html = f'<b class="publication__badge">{esc(abbr)}</b> / ' if abbr else ""
+
+    authors = [normalize_author(a) for a in entry.get("authors", [])]
+    max_visible = 10
+    self_idx = next((i for i, a in enumerate(authors) if a.get("self")), -1)
+    if self_idx >= max_visible - 1:
+      max_visible = self_idx + 2
+    need_collapse = len(authors) > max_visible
+    hidden_count = len(authors) - max_visible
+
+    author_parts = []
+    for idx, a in enumerate(authors):
+      name = esc(a.get("name"))
+      is_hidden = need_collapse and idx >= max_visible
+      is_last = idx == len(authors) - 1
+
+      if need_collapse and idx == max_visible:
+        author_parts.append(
+            f'<span class="publication__more" role="button" '
+            f"onclick=\"this.style.display='none';"
+            f"var p=this.closest('.publication__authors');"
+            f"var h=p.querySelectorAll('.publication__author-hidden');"
+            f"h.forEach(function(e,i){{e.style.display='';e.style.opacity='0';"
+            f"setTimeout(function(){{e.style.opacity='1'}},i*40)}})\">"
+            f"and {hidden_count} more</span>"
+        )
+
+      if is_hidden:
+        if a.get("self"):
+          author_parts.append(
+              f'<span class="publication__author-hidden" style="display:none">'
+              f', <span class="publication__author--self"><b><u>{name}</u></b></span></span>'
+          )
+        else:
+          author_parts.append(
+              f'<span class="publication__author-hidden" style="display:none">'
+              f', <span class="publication__author">{name}</span></span>'
+          )
+      else:
+        is_last_visible = (need_collapse and idx == max_visible - 1) or (not need_collapse and is_last)
+        sep = "" if is_last_visible else ", "
+        if a.get("self"):
+          author_parts.append(f'<span class="publication__author--self"><b><u>{name}</u></b></span>{sep}')
+        else:
+          author_parts.append(f'<span class="publication__author">{name}</span>{sep}')
+
+    venue = esc(entry.get("venue", ""))
+
+    award = entry.get("award")
+    award_html = f'\n                <div class="publication__award">{esc(award)}</div>' if award else ""
+
+    links_list = list(entry.get("links", []))
+    if not links_list and link:
+      links_list = [{"label": "PAPER", "url": link}]
+    link_parts = []
+    for lnk in links_list:
+      url = lnk.get("url", "")
+      label = esc(lnk.get("label", "Link"))
+      if url:
+        link_parts.append(
+            f'<a class="publication__btn" href="{esc(url)}" '
+            f'target="_blank" rel="noopener noreferrer">{label}</a>'
+        )
+
+    bib = entry.get("bib")
+    if bib:
+      link_parts.append(
+          '<a class="publication__btn" role="button" '
+          "onclick=\"var b=this.closest('.publication__entry').querySelector('.publication__bib');"
+          "b.style.display=b.style.display==='none'?'':'none'\">BIB</a>"
+      )
+
+    links_html = f'\n                <div class="publication__links">{"".join(link_parts)}</div>' if link_parts else ""
+    bib_html = f'\n                <div class="publication__bib" style="display:none"><pre>{esc(bib)}</pre></div>' if bib else ""
+
     items_html.append(
         f"""
-          <div class="publication__item">
-            <b><span class="publication__tag">{esc(tag)}</span></b>
-            <span class="publication__title">{esc(entry.get("title"))}</span>
-            {link_html}
-            <br />
-            {"".join(authors_html)}
-            <br />
-            <span class="publication__venue">{esc(entry.get("venue"))}</span>
-            <span class="publication__abbr">({esc(abbr)})</span>
-          </div>
+            <li>
+              <div class="publication__entry">
+                <div class="publication__title">
+                  {badge_html}{title_html}
+                </div>
+                <div class="publication__authors">
+                  {"".join(author_parts)}
+                </div>
+                <div class="publication__venue">
+                  <em>{venue}</em>
+                </div>{award_html}{links_html}{bib_html}
+              </div>
+            </li>
         """
     )
   return f"""
@@ -255,16 +340,16 @@ def render_publications(entries: List[Dict[str, Any]], cols: Tuple[str, str, str
     <div class="row">
       <div class="{left_col}"></div>
       <div class="{main_col}">
-        <h2>{esc(title)}</h2>
+        <h2>Publications</h2>
       </div>
       <div class="{right_col}"></div>
     </div>
     <div class="row">
       <div class="{left_col}"></div>
       <div class="{main_col}">
-        <div class="publication">
+        <ul class="publication list-unstyled">
           {''.join(items_html)}
-        </div>
+        </ul>
       </div>
       <div class="{right_col}"></div>
     </div>
@@ -311,9 +396,10 @@ def render_list_section(
   """
 
 
-def render_footer(note: str, emoji: str, cols: Tuple[str, str, str]) -> str:
+def render_footer(note: str, emoji: str, copyright: str, cols: Tuple[str, str, str]) -> str:
   left_col, _, right_col = cols
   prefix = f"{esc(emoji)} " if emoji else ""
+  copyright_html = f'\n          <span class="footer__copyright">{copyright}</span>' if copyright else ""
   return f"""
   <div class="container">
     <div class="row">
@@ -321,7 +407,7 @@ def render_footer(note: str, emoji: str, cols: Tuple[str, str, str]) -> str:
       <footer class="text-center">
         <div>
           <span class="footer__note">{prefix}{esc(note)}</span>
-        </div>
+        </div>{copyright_html}
       </footer>
       <div class="{right_col}"></div>
     </div>
@@ -335,17 +421,9 @@ def build_page(
     icon_emoji: str = "🌐",
     footer_note: str = "",
     footer_emoji: str = "🌈",
+    footer_copyright: str = "",
     analytics_path: Path | None = None,
 ) -> str:
-  DEFAULT_LABELS = {
-      "research_interests": "Research Interests",
-      "experience": "Experience",
-      "education": "Education",
-      "publications": "Publications",
-      "teaching_assistant": "Teaching Assistant",
-      "awards": "Awards and Honors",
-  }
-  labels = {**DEFAULT_LABELS, **(data.get("labels") or {})}
   spacer = '<div class="row"><p></p></div>'
   spacer_count = max(int(layout.get("spacers", 2)), 0)
   section_gap = "\n".join([spacer] * spacer_count)
@@ -353,9 +431,8 @@ def build_page(
   icon_href = favicon_data_url(icon_emoji)
   ga_script = read_analytics_snippet(analytics_path)
   profile = data.get("profile", {})
-  lang = data.get("lang", "en")
   return f"""<!doctype html>
-<html lang="{lang}">
+<html lang="en">
 <head>
 {ga_script}
   <meta charset="utf-8">
@@ -383,19 +460,19 @@ def build_page(
     </div>
   </div>
   {section_gap}
-  {render_interests(data.get("research_interests", []), cols, labels["research_interests"])}
+  {render_interests(data.get("research_interests", []), cols)}
   {section_gap}
-  {render_timeline(labels["experience"], data.get("experience", []), cols)}
+  {render_timeline("Experience", data.get("experience", []), cols)}
   {section_gap}
-  {render_timeline(labels["education"], data.get("education", []), cols)}
+  {render_timeline("Education", data.get("education", []), cols)}
   {section_gap}
-  {render_publications(data.get("publications", []), cols, labels["publications"])}
+  {render_publications(data.get("publications", []), cols)}
   {section_gap}
-  {render_list_section(labels["teaching_assistant"], data.get("teaching_assistant", []), "ta-list", cols)}
+  {render_list_section("Teaching Assistant", data.get("teaching_assistant", []), "ta-list", cols)}
   {section_gap}
-  {render_list_section(labels["awards"], data.get("awards", []), "award-list", cols)}
+  {render_list_section("Awards and Grants", data.get("awards", []), "award-list", cols)}
   {section_gap}
-  {render_footer(footer_note, footer_emoji, cols)}
+  {render_footer(footer_note, footer_emoji, footer_copyright, cols)}
 </body>
 </html>
 """
@@ -417,24 +494,37 @@ def main(argv: List[str]) -> None:
 
   data = read_content(input_path)
 
+  if "publications" not in data and DEFAULT_PUBLICATIONS.exists():
+    data["publications"] = json.loads(DEFAULT_PUBLICATIONS.read_text(encoding="utf-8"))
+
+  contents_dir = DEFAULT_PUBLICATIONS.parent
+  for pub in data.get("publications", []):
+    if "bib" not in pub and "bib_file" in pub:
+      bib_path = contents_dir / pub["bib_file"]
+      if bib_path.exists():
+        pub["bib"] = bib_path.read_text(encoding="utf-8").strip()
+
   site = read_site_config(DEFAULT_SITE_CONFIG)
   main_layout = {**DEFAULT_MAIN_LAYOUT, **(site.get("layout") or {})}
   resume_layout = {**DEFAULT_RESUME_LAYOUT, **(site.get("resume_layout") or {})}
   icon_emoji = site.get("icon_emoji") or "🌐"
   footer_note = site.get("footer_note", "")
   footer_emoji = site.get("footer_emoji", "🌈")
+  footer_copyright = site.get("footer_copyright", "")
 
+  out_path.parent.mkdir(parents=True, exist_ok=True)
   out_path.write_text(
       build_page(data, main_layout, icon_emoji=icon_emoji, footer_note=footer_note,
-                 footer_emoji=footer_emoji, analytics_path=DEFAULT_ANALYTICS_FILE),
+                 footer_emoji=footer_emoji, footer_copyright=footer_copyright,
+                 analytics_path=DEFAULT_ANALYTICS_FILE),
       encoding="utf-8",
   )
   print(f"Wrote {out_path}")
 
-  resume_out = ROOT / (out_path.stem + ".resume" + out_path.suffix)
+  resume_out = out_path.parent / (out_path.stem + ".resume" + out_path.suffix)
   resume_out.write_text(
       build_page(data, resume_layout, icon_emoji=icon_emoji, footer_note=footer_note,
-                 footer_emoji=footer_emoji),
+                 footer_emoji=footer_emoji, footer_copyright=footer_copyright),
       encoding="utf-8",
   )
   print(f"Wrote {resume_out}")

@@ -21,16 +21,11 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 SCRIPTS = ROOT / "scripts"
 CONTENT = ROOT / "contents" / "profile.json"
-CONTENT_ZH = ROOT / "contents" / "profile.zh.json"
 GENERATED_MAIN = ROOT / "index.generate.html"
 GENERATED_RESUME_HTML = ROOT / "index.generate.resume.html"
 GENERATED_RESUME_PDF = ROOT / "index.generate.resume.pdf"
-GENERATED_ZH_MAIN = ROOT / "index.generate.zh.html"
-GENERATED_ZH_RESUME_HTML = ROOT / "index.generate.zh.resume.html"
-GENERATED_ZH_RESUME_PDF = ROOT / "index.generate.zh.resume.pdf"
 PUBLISHED_MAIN = ROOT / "index.html"
 PUBLISHED_RESUME_PDF = ROOT / "files" / "resume.pdf"
-PUBLISHED_ZH_RESUME_PDF = ROOT / "files" / "resume.zh.pdf"
 
 STAGES = ["build", "generate", "deploy"]
 
@@ -52,15 +47,10 @@ def run(cmd: list[str]) -> None:
 def build() -> None:
   run([python_bin(), str(SCRIPTS / "build_site.py"),
        "--input", str(CONTENT), "--output", str(GENERATED_MAIN)])
-  if CONTENT_ZH.exists():
-    run([python_bin(), str(SCRIPTS / "build_site.py"),
-         "--input", str(CONTENT_ZH), "--output", str(GENERATED_ZH_MAIN)])
 
 
 def generate() -> None:
   run([python_bin(), str(SCRIPTS / "render_pdf.py"), str(GENERATED_RESUME_HTML)])
-  if GENERATED_ZH_RESUME_HTML.exists():
-    run([python_bin(), str(SCRIPTS / "render_pdf.py"), str(GENERATED_ZH_RESUME_HTML)])
 
 
 def deploy_outputs() -> None:
@@ -69,9 +59,6 @@ def deploy_outputs() -> None:
   PUBLISHED_RESUME_PDF.parent.mkdir(parents=True, exist_ok=True)
   shutil.copyfile(GENERATED_RESUME_PDF, PUBLISHED_RESUME_PDF)
   print(f"Copied {GENERATED_RESUME_PDF.name} -> {PUBLISHED_RESUME_PDF.relative_to(ROOT)}")
-  if GENERATED_ZH_RESUME_PDF.exists():
-    shutil.copyfile(GENERATED_ZH_RESUME_PDF, PUBLISHED_ZH_RESUME_PDF)
-    print(f"Copied {GENERATED_ZH_RESUME_PDF.name} -> {PUBLISHED_ZH_RESUME_PDF.relative_to(ROOT)}")
 
 
 def main(argv: list[str]) -> None:

@@ -2,6 +2,7 @@
   "icon_emoji": "🌈",
   "footer_emoji": "🌈",
   "footer_note": "Last updated: Jun 2026",
+  "footer_copyright": "&copy; 2026 Mingxin Li.",
   "layout":        { "left": 1, "main": 10, "right": 1, "spacers": 2 },
   "resume_layout": { "left": 0, "main": 12, "right": 0, "spacers": 2 }
 }

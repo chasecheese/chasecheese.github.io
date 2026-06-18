@@ -136,18 +136,36 @@ a {
 }
 
 .publication {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+  padding-left: 0;
 }
 
-.publication__tag {
+.publication li {
+  margin-bottom: 16px;
+  break-inside: avoid;
+}
+
+.publication__badge {
+  color: #aaaaaa;
   font-family: "fira-sans-light", sans-serif;
-  color: rgb(0, 77, 0);
 }
 
 .publication__title {
   font-family: "fira-sans", sans-serif;
+}
+
+.publication__title-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.publication__title-link:hover {
+  text-decoration: underline;
+}
+
+.publication__authors {
+  font-size: 16px;
+  font-family: "fira-sans-ultra-light", sans-serif;
+  margin-top: 2px;
 }
 
 .publication__author {
@@ -159,14 +177,66 @@ a {
   font-family: "fira-sans-light", sans-serif;
 }
 
-.publication__venue,
-.publication__abbr {
-  font-size: 16px;
-  font-family: "fira-sans-light", sans-serif;
+.publication__author-hidden {
+  transition: opacity 0.3s ease;
 }
 
-.publication__link {
-  float: right;
+.publication__more {
+  font-size: 16px;
+  font-family: "fira-sans-light", sans-serif;
+  color: #023c9f;
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-style: dashed;
+  margin-left: 0.3em;
+}
+
+.publication__venue {
+  font-size: 16px;
+  font-family: "fira-sans-light", sans-serif;
+  margin-top: 2px;
+}
+
+.publication__award {
+  color: #ff6868;
+  font-weight: 500;
+  margin-top: 4px;
+}
+
+.publication__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.publication__btn {
+  display: inline-block;
+  padding: 1px 8px;
+  font-size: 13px;
+  font-family: "fira-sans-light", sans-serif;
+  color: #333;
+  background: transparent;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  text-decoration: none;
+}
+
+.publication__btn:hover {
+  background: #f5f5f5;
+  color: #333;
+  cursor: pointer;
+}
+
+.publication__bib pre {
+  margin-top: 8px;
+  padding: 10px;
+  font-size: 13px;
+  background: #f8f8f8;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  white-space: pre-wrap;
+  word-break: break-all;
 }
 
 .ta-list,
@@ -182,7 +252,8 @@ a {
   font-family: "fira-sans-light", sans-serif;
 }
 
-.footer__note {
+.footer__note,
+.footer__copyright {
   font-size: 14px;
   font-family: "fira-sans-ultra-light", sans-serif;
 }

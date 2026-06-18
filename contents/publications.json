@@ -1,0 +1,102 @@
+[
+  {
+    "tag": "[APNet'26]",
+    "abbr": "APNet'26",
+    "title": "Scaling LLM Agent Tool Access at Cloud Scale (Poster)",
+    "link": "https://mingxin.site/files/apnet26-poster-final20.pdf",
+    "venue": "The 10th Asia-Pacific Workshop on Networking",
+    "authors": [
+      { "name": "Mingxin Li", "self": true },
+      "Enge Song", "Yueshang Zuo",
+      "Xiaodong Liu", "Rong Wen", "Jian He", "Jing Tie",
+      "Zhou Shao", "Qiang Fu", "Xiaobo Xue", "Xiong Xiao", "Luyao Zhong",
+      "Shaokai Zhang", "Jiangu Zhao", "Jianyuan Lu", "Shize Zhang",
+      "Xiaoqing Sun", "Changgang Zheng", "Zihao Fan", "Haonan Li",
+      "Tian Pan", "Xiaomin Wu", "Yang Song", "Xing Li", "Biao Lyu",
+      "Meng Li", "Haipeng Dai", "Guihai Chen", "Shunmin Zhu"
+    ],
+    "bib_file": "bibs/li2026scaling.bib"
+  },
+  {
+    "tag": "[APNet'26]",
+    "abbr": "APNet'26",
+    "title": "Rethinking MoE Routing for Commodity GPUs (Poster)",
+    "venue": "The 10th Asia-Pacific Workshop on Networking",
+    "authors": [
+      "Meng Li", "Siyuan Tong", { "name": "Mingxin Li", "self": true },
+      "Qingkai Meng", "Xiaoliang Wang", "Haipeng Dai"
+    ],
+    "bib_file": "bibs/li2026rethinking.bib"
+  },
+  {
+    "tag": "[APNet'26]",
+    "abbr": "APNet'26",
+    "title": "Single-Core Hotspots on Your VNF? Break Them Up!",
+    "venue": "The 10th Asia-Pacific Workshop on Networking",
+    "authors": [
+      "Changgang Zheng", "Bowen Yang", "Jin Ke", "Ye Yang", "Enge Song",
+      "Haonan Li", "Zihao Fan", { "name": "Mingxin Li", "self": true },
+      "Yilong Lv", "Yisong Qiao", "Jun Liang", "Donglin Lai",
+      "Bengbeng Xue", "Yang Song", "Xing Li", "Rong Wen", "Zhigang Zong",
+      "Shunmin Zhu"
+    ],
+    "bib_file": "bibs/zheng2026singlecore.bib"
+  },
+  {
+    "tag": "[NSDI'26]",
+    "abbr": "NSDI'26",
+    "title": "CStar Gateway: Augmenting Public Cloud Infrastructure for Heterogeneous Network Function Virtualization",
+    "link": "https://www.usenix.org/conference/nsdi26/presentation/li-haonan",
+    "venue": "23rd USENIX Symposium on Networked Systems Design and Implementation",
+    "authors": [
+      "Haonan Li", "Tian Pan", "Jin Ke", "Baohai Hu", "Changgang Zheng",
+      "Enge Song", "Zhi Xu", "Ye Yang", "Bowen Yang", "Donglin Lai",
+      "Yisong Qiao", "Bengbeng Xue", "Jianyuan Lu", "Xiaoqing Sun",
+      "Shize Zhang", "Zihao Fan", { "name": "Mingxin Li", "self": true },
+      "Song Yang", "Jun Liang", "Xionglie Wei", "Biao Lyu", "Rong Wen",
+      "Zhigang Zong", "Jiao Zhang", "Tao Huang", "Shunmin Zhu"
+    ],
+    "bib_file": "bibs/li2026cstar.bib"
+  },
+  {
+    "tag": "[NSDI'26]",
+    "abbr": "NSDI'26",
+    "title": "Bifrost: Alibaba's Next-Generation VPC Network with High-Performance Multipath Reliable Transport",
+    "link": "https://www.usenix.org/conference/nsdi26/presentation/fan",
+    "venue": "23rd USENIX Symposium on Networked Systems Design and Implementation",
+    "authors": [
+      "Zihao Fan", "Xing Li", "Ye Yang", "Bo Jiang", "Bowen Yang",
+      "Yilong Lv", "Yuke Hong", "Yinian Zhou", "Junnan Cai", "Jiayue Xu",
+      "Yunrui Hu", "Zhao Gao", "Ke Sun", "Yimin Liu", "Xiangdong Zhang",
+      "Enge Song", "Jianyuan Lu", "Xiaoqing Sun", "Shize Zhang", "Haonan Li",
+      { "name": "Mingxin Li", "self": true }, "Changgang Zheng", "Song Yang",
+      "Jun Liang", "Biao Lyu", "Rong Wen", "Zhigang Zong", "Shunmin Zhu"
+    ],
+    "bib_file": "bibs/fan2026bifrost.bib"
+  },
+  {
+    "tag": "[TKDE'24]",
+    "abbr": "TKDE'24",
+    "title": "A Survey of Multi-Dimensional Indexes: Past and Future Trends",
+    "link": "https://doi.org/10.1109/TKDE.2024.3364183",
+    "venue": "IEEE Transactions on Knowledge and Data Engineering, Volume 36, Issue 8",
+    "authors": [
+      { "name": "Mingxin Li", "self": true }, "Hancheng Wang", "Haipeng Dai",
+      "Meng Li", "Chengliang Chai", "Rong Gu", "Feng Chen", "Zhiyuan Chen",
+      "Shuaituan Li", "Qizhi Liu", "Guihai Chen"
+    ],
+    "bib_file": "bibs/li2024survey.bib"
+  },
+  {
+    "tag": "[BlockSys'22]",
+    "abbr": "BlockSys'22",
+    "title": "Latency Analysis for Raft Consensus on Hyperledger Fabric",
+    "link": "https://doi.org/10.1007/978-981-19-8043-5_12",
+    "venue": "4th International Conference on Blockchain and Trustworthy Systems",
+    "authors": [
+      "Xuefeng Piao", { "name": "Mingxin Li", "self": true },
+      "Fanchao Meng", "Huihui Song"
+    ],
+    "bib_file": "bibs/piao2022latency.bib"
+  }
+]
